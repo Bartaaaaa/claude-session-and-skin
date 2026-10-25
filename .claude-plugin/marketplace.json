@@ -1,0 +1,8 @@
+{
+  "name": "bart-claude-mods",
+  "owner": { "name": "Bartłomiej Grządziel" },
+  "metadata": { "description": "Mods for Claude Code: a usage bar with an animated character" },
+  "plugins": [
+    { "name": "session-usage", "source": "./session-usage", "description": "Claude ✻ gets more and more nervous as your 5h session is used up" }
+  ]
+}

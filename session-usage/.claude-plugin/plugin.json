@@ -1,0 +1,31 @@
+{
+  "name": "session-usage",
+  "version": "0.1.0",
+  "description": "Claude ✻ gets more and more nervous as your 5h session is used up",
+  "author": {
+    "name": "Bartłomiej Grządziel"
+  },
+  "license": "MIT",
+  "keywords": ["usage", "rate-limit", "status", "mascot", "animation"],
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "showResetIn": {
+      "type": "boolean",
+      "title": "Time until reset",
+      "description": "Show how long until the 5h session resets, e.g. ↻ 1h52.",
+      "default": true
+    },
+    "showRate": {
+      "type": "boolean",
+      "title": "Usage rate",
+      "description": "Show how fast the 5h session is being used, in % per hour, e.g. +18%/h. Appears after 5 minutes of readings.",
+      "default": true
+    },
+    "showSessionTime": {
+      "type": "boolean",
+      "title": "Session duration",
+      "description": "Show how long this Claude Code session has been running, e.g. sess 2h05.",
+      "default": true
+    }
+  }
+}
