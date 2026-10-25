@@ -51,6 +51,7 @@ test('the cat knocks the glass off the table', async () => {
   const frames = Array.from({ length: 40 }, (_, tick) => drawCat('flip', tick))
   expect(frames.some(f => f.sideRow === 0 && f.side.includes('▯'))).toBe(true)
   expect(frames.some(f => f.sideRow === 2 && f.side.includes('✶'))).toBe(true)
+  expect(frames.some(f => f.side === '▯' && [...f.rows[0]][7] !== ' ')).toBe(true)
 })
 
 test('bubbles always start at the same column, and the gauge does not move', async () => {
@@ -98,6 +99,7 @@ test('the dino runs: the ground and its cacti scroll past', async () => {
   expect(grounds.size).toBeGreaterThan(5)
   expect(drawDino('ko', 0).side).toContain('GAME OVER')
 })
+
 
 test('BB-8 rolls: the ball pattern turns', async () => {
   const balls = new Set(Array.from({ length: 8 }, (_, tick) => drawBb8('code', tick).rows[2]))

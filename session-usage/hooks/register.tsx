@@ -14,7 +14,7 @@ import {
   type Tall,
   MOODS, ACTIVITIES, SKINS, DEFAULT_SKIN, SLEEP_FRAME, SLEEP_Z, ERROR_FRAME, REFRESH_FRAMES,
   activityFor, skinOf, drawFace, cellWidth, padCells,
-  tierFor, pulse, gradientAt, filledCells, hhmm, dayHhmm, addSample, projectFull, ratePerHour, rateLabel, durationLabel,
+  tierFor, pulse, gradientAt, filledCells, hhmm, dayHhmm, addSample, projectFull, ratePerHour, rateLabel, percentLabel, durationLabel,
   weekDay, resetOf, isFreshWindow, trackOf, isWeekRunning, recordWeek, dailyUsage, dayColor,
 } from './look'
 
@@ -246,7 +246,7 @@ export const register: Register = (on, options) => {
     // Projection: when 100 % will be reached, flagged on hover if it comes before the reset
     const readings = await read($, samples)
     const fullAt = projectFull(readings)
-    const resetMs = u.resetsAt ? Date.parse(u.resetsAt) : null
+    const resetMs = resetOf(u.resetsAt)
     const isWorried = fullAt !== null && resetMs !== null && fullAt < resetMs
 
     let doing: Activity | null = e.props.isWorking
@@ -301,7 +301,7 @@ export const register: Register = (on, options) => {
     const details = [
       resetMs !== null ? `↻ ${hhmm(resetMs)}` : null,
       fullAt !== null ? `100% at ${hhmm(fullAt)}${isWorried ? ' ⚠' : ''}` : null,
-      u.week !== null ? `7d ${u.week}%${u.weekResetsAt ? ` ↻ ${dayHhmm(Date.parse(u.weekResetsAt))}` : ''}` : null,
+      u.week !== null ? `7d ${percentLabel(u.week)}${weekResetMs !== null ? ` ↻ ${dayHhmm(weekResetMs)}` : ''}` : null,
     ].filter(Boolean).join(' · ')
 
     const perHour = ratePerHour(readings)
@@ -315,14 +315,14 @@ export const register: Register = (on, options) => {
     const gauges = (
       <Box>
         {bar('s', percent, BAR_CELLS)}
-        <Text color={color} bold> {padCells(shown === null ? '—' : `${shown}%`, PERCENT_WIDTH)}</Text>
+        <Text color={color} bold> {padCells(shown === null ? '—' : percentLabel(shown), PERCENT_WIDTH)}</Text>
         {week !== null ? (
           <Box>
             <Text dimColor> │ 7d </Text>
             {days.map((used, i) =>
               used ? <Text key={`d${i}`} color={dayColor(used)}>{CELL}</Text> : <Text key={`d${i}`} dimColor>{CELL}</Text>,
             )}
-            <Text dimColor> {week}%</Text>
+            <Text dimColor> {percentLabel(week)}</Text>
           </Box>
         ) : null}
         {extras ? <Text dimColor> │ {extras}</Text> : null}

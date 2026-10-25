@@ -1,6 +1,6 @@
 import { test, expect } from 'claude-code/testing'
 import {
-  tierFor, gradientAt, filledCells, addSample, projectFull, ratePerHour, rateLabel, durationLabel,
+  tierFor, gradientAt, filledCells, addSample, projectFull, ratePerHour, rateLabel, percentLabel, durationLabel,
   activityFor,
   weekDay, resetOf, isFreshWindow, trackOf, isWeekRunning, recordWeek, dailyUsage, dayColor,
 } from '../hooks/look'
@@ -38,6 +38,17 @@ test('projection to 100 %', async () => {
   // new window: start over
   s = addSample(s, { t: 11 * min, p: 1, resetsAt: 'R2' })
   expect(s.length).toBe(1)
+})
+
+test('a reset time that jitters by a few seconds keeps the readings', async () => {
+  let s = addSample([], { t: 0, p: 10, resetsAt: '2026-10-25T18:00:00.000Z' })
+  s = addSample(s, { t: 60_000, p: 11, resetsAt: '2026-10-25T18:00:02.000Z' })
+  expect(s.length).toBe(2)
+})
+
+test('percentages keep at most one decimal', async () => {
+  expect(percentLabel(33.3333)).toBe('33.3%')
+  expect(percentLabel(100)).toBe('100%')
 })
 
 test('each tool has its animation', async () => {

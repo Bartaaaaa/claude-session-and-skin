@@ -52,11 +52,12 @@ Or inside Claude Code:
 /plugin install session-usage@bart-claude-mods
 ```
 
-Choose the *user* scope to get it in every project, then restart Claude Code.
+The terminal command installs it for every project. With `/plugin`, pick the *user* scope to get the same. Then restart Claude Code.
 
 ### Requirements
 
 - A recent Claude Code version (tested with 2.1.310).
+- Signed in with a Claude Pro or Max subscription: the 5-hour and weekly limits come from it. Without them the bar shows `—`.
 - A terminal with true colour.
 - For `whale`, `cat`, `crewmate`, `dino` and `bb8`: a font with the Unicode *Symbols for Legacy Computing* block (sextant characters), e.g. Cascadia Code, Iosevka, or a terminal that draws them itself (Kitty, WezTerm, foot, recent GNOME Terminal). If you see boxes instead of the character, use `clawd` or `smiley`, which only need standard block characters.
 
@@ -87,6 +88,12 @@ claude plugin update session-usage
 claude plugin uninstall session-usage
 ```
 
+## Troubleshooting
+
+- **Nothing appears**: restart Claude Code after installing, and check that `claude plugin list` shows `session-usage` as enabled.
+- **Boxes instead of the character**: your font lacks sextant characters (see Requirements); switch with `/usage-skin clawd`.
+- **No `%/h` rate**: it appears after 5 minutes of readings in the current 5h window.
+
 ## Development
 
 ```sh
@@ -107,6 +114,8 @@ Layout of `session-usage/hooks/`:
 | `clawd.ts`, `whale.ts`, `cat.ts`, `crewmate.ts`, `dino.ts`, `bb8.ts` | One file per 3-line character |
 
 To add a character, copy one of the character files, describe its scenes, register it in `TALL` (`register.tsx`) and `SKINS` (`look.ts`), then check every state with `/usage-demo`.
+
+Issues and pull requests are welcome; run `claude plugin test session-usage` before submitting.
 
 ## License
 

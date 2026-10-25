@@ -160,7 +160,7 @@ const MIN_SPAN_MS = 5 * 60_000
 /** Adds a reading; starts over when the window has been reset. */
 export const addSample = (samples: Sample[], s: Sample): Sample[] => {
   const last = samples[samples.length - 1]
-  const isNewWindow = last !== undefined && (last.resetsAt !== s.resetsAt || s.p < last.p)
+  const isNewWindow = last !== undefined && (resetOf(last.resetsAt) !== resetOf(s.resetsAt) || s.p < last.p)
   return [...(isNewWindow ? [] : samples), s].slice(-60)
 }
 
@@ -179,6 +179,9 @@ export const ratePerHour = (samples: Sample[]): number | null => {
   if (!first || !last || last.t - first.t < MIN_SPAN_MS) return null
   return (Math.max(0, last.p - first.p) / (last.t - first.t)) * 3600_000
 }
+
+/** A percentage with at most one decimal: "33.3%", "100%". */
+export const percentLabel = (p: number) => `${Math.round(p * 10) / 10}%`
 
 export const rateLabel = (perHour: number) => `+${perHour < 10 ? Math.round(perHour * 10) / 10 : Math.round(perHour)}%/h`
 

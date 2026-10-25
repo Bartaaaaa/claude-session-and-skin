@@ -33,17 +33,18 @@ const EARS: Record<string, Point[]> = {
   flat: [[0, 1], [1, 1], [9, 1], [10, 1]],
   twitch: [[0, 1], [1, 1], [9, 0], [8, 1], [9, 1]],
 }
-// Front paws: down, one lifted to type, or reaching out to lick or swipe
+// Front paws: down, one lifted to type, raised to lick, or stretched up to the glass on the table
 const PAWS: Record<string, Point[]> = {
   sit: [[1, 8], [2, 8], [8, 8], [9, 8]],
   left: [[8, 8], [9, 8]],
   right: [[1, 8], [2, 8]],
-  lick: [[1, 8], [2, 8], [9, 6], [10, 5], [11, 4]],
+  lick: [[1, 8], [2, 8], [9, 6], [10, 6], [10, 5], [11, 5], [11, 4], [12, 4]],
+  reach: [[1, 8], [2, 8], [9, 5], [10, 5], [10, 4], [11, 4], [11, 3], [12, 3], [12, 2], [13, 2], [13, 1], [14, 1]],
 }
 const TAILS: Record<string, Point[]> = {
-  curl: [[17, 3], [16, 4], [16, 5], [15, 6], [13, 7], [14, 7], [11, 8], [12, 8]],
+  curl: [[17, 3], [16, 4], [16, 5], [15, 6], [13, 7], [14, 7], [10, 8], [11, 8], [12, 8]],
   high: [[14, 1], [13, 2], [12, 3], [12, 4], [12, 5], [12, 6], [11, 7], [11, 8]],
-  low: [[11, 8], [12, 8], [13, 8], [14, 8], [15, 8], [16, 7], [17, 7]],
+  low: [[10, 8], [11, 8], [12, 8], [13, 8], [14, 8], [15, 8], [16, 7], [17, 7]],
 }
 const WIDTH = 9
 const SIDE_AT = 8
@@ -83,13 +84,12 @@ const SCENES: Record<Exclude<TallState, Activity>, Pose[]> = {
   flip: [
     { side: '▯', ticks: 8 },
     { eyes: 'right', side: '▯', ticks: 6 },
-    { eyes: 'right', paws: 'lick', side: '▯', ticks: 4 },
-    { eyes: 'right', side: '▯', ticks: 2 },
-    { eyes: 'right', paws: 'lick', side: ' ▯', ticks: 3 },
-    { eyes: 'right', paws: 'lick', side: '  ▯', ticks: 3 },
-    { eyes: 'right', side: '   ▯', ticks: 2 },
-    { eyes: 'wide', side: '    ▯', sideRow: 2, ticks: 2 },
-    { eyes: 'wide', side: '    ✶', sideRow: 2, ticks: 4 },
+    { eyes: 'right', paws: 'reach', side: '▯', ticks: 4 },
+    { eyes: 'right', side: '▯', ticks: 3 },
+    { eyes: 'right', paws: 'reach', side: ' ▯', ticks: 4 },
+    { eyes: 'right', side: ' ▯', ticks: 3 },
+    { eyes: 'wide', side: '▯', sideRow: 2, ticks: 2 },
+    { eyes: 'wide', side: '✶', sideRow: 2, ticks: 4 },
     { eyes: 'happy', ticks: 8 },
   ],
   // Out of tokens: sitting but groggy, ears flat, tail down, stars around the head
