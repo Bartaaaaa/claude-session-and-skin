@@ -1,4 +1,4 @@
-# ClaudeMods
+# claude-session-and-skin
 
 Mods for [Claude Code](https://claude.com/claude-code).
 
@@ -42,13 +42,13 @@ Characters: `clawd` (default), `smiley`, `whale`, `cat`, `crewmate`, `dino`, `bb
 From a terminal:
 
 ```sh
-claude plugin install session-usage --marketplace YOUR_GITHUB_USER/ClaudeMods
+claude plugin install session-usage --marketplace Bartaaaaa/claude-session-and-skin
 ```
 
 Or inside Claude Code:
 
 ```
-/plugin marketplace add YOUR_GITHUB_USER/ClaudeMods
+/plugin marketplace add Bartaaaaa/claude-session-and-skin
 /plugin install session-usage@bart-claude-mods
 ```
 
@@ -90,8 +90,8 @@ claude plugin uninstall session-usage
 ## Development
 
 ```sh
-git clone https://github.com/YOUR_GITHUB_USER/ClaudeMods
-cd ClaudeMods
+git clone https://github.com/Bartaaaaa/claude-session-and-skin
+cd claude-session-and-skin
 claude plugin validate .
 claude plugin test session-usage
 claude plugin install session-usage --marketplace .
